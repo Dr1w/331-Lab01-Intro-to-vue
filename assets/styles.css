@@ -91,6 +91,11 @@ li {
 .out-of-stock-img {
   opacity:0.5
 }
+/* assets/styles.css */
+.out-of-stock-image {
+  filter: grayscale(100%);
+}
+
 
 p {
   font-size: 22px;
