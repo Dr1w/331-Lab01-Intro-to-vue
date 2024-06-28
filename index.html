@@ -14,6 +14,7 @@
     <div id="app">
         <a :href="productLink" target="_blank"><h1>{{ product }}</h1></a>
         <div class="nav-bar"></div>
+        <div class="cart">Cart ({{ cart }})</div> <!-- 6.2 -->
         <div class="product-display">
             <div class="product-container">
                 <div class="product-image">
@@ -22,16 +23,18 @@
                 </div>
                 <div class="product-info">
                     <h1>{{ product }}</h1>
-                    <p v-if="inventory > 10">In Stock</p>
-                    <p v-else-if="inventory > 0 && inventory <= 10">Almost out of Stock</p>
-                    <p v-else>Out of Stock</p>
+                    <p v-if="inventory > 10">In Stock</p> <!-- 保留 -->
+                    <p v-else-if="inventory > 0 && inventory <= 10">Almost out of Stock</p> <!-- 保留 -->
+                    <p v-else>Out of Stock</p> <!-- 保留 -->
                     <p v-if="onSale">On Sale!</p>
                     <ul>
                         <li v-for="detail in details">{{ detail }}</li>
                     </ul>
-                    <div v-for="variant in variants" :key="variant.id">
+                    <div v-for="variant in variants" :key="variant.id" @mouseover="updateImage(variant.image)"> <!-- 修改代码 -->
                         {{ variant.color }}
+                        <button class="button" @click="addToCart">Add To Cart</button> <!-- 6.5 -->                    
                     </div>
+                    <button class="button" @click="toggleInStock">Toggle In Stock</button> <!-- 6.7 -->
                     <p>Sizes: <span v-for="(size, index) in sizes" :key="index">{{ size }}<span v-if="index < sizes.length - 1">, </span></span></p>
                 </div>
             </div>
