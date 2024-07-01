@@ -1,6 +1,5 @@
 // main.js
-const { createApp, ref } = Vue;
-
+const { createApp, ref, computed } = Vue; // 8.2
 createApp({
   setup() {
     const product = ref('Boots');
@@ -25,6 +24,9 @@ createApp({
     function addToCart() {
       cart.value += 1;
     }
+    const title = computed(() => { // 8.2
+      return brand.value + ' ' + product.value;
+    });
     function updateImage(variantImage) {
       image.value = variantImage;
     }
@@ -38,8 +40,7 @@ createApp({
     }
 
     return {
-      product,
-      brand,
+      title,
       image,
       productLink,
       inStock,

@@ -23,7 +23,7 @@
                     <img :src="image" :class="{ 'out-of-stock-image': !inStock }" alt="Product Image"> <!-- 7.6 -->
                 </div>
                 <div class="product-info">
-                    <h1>{{ brand + ' ' + product }}</h1>
+                    <h1>{{ title }}</h1>
                     <p v-if="inventory > 10">In Stock</p>
                     <p v-else-if="inventory > 0 && inventory <= 10">Almost out of Stock</p>
                     <p v-else>Out of Stock</p>
