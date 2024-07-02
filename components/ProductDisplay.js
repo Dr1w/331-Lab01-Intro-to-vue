@@ -1,32 +1,31 @@
 const productDisplay = {
     template:
     `
-    
-        <div class="product-display">
-            <div class="product-container">
-                <div class="product-image">
-                    <img :src="image" :class="{ 'out-of-stock-image': !inStock }" alt="Product Image">
-                </div>
-                <div class="product-info">
-                    <h1>{{ title }}</h1>
-                    <p v-if="inStock">In Stock</p>
-                    <p v-else>Out of Stock</p>
-                    <p v-if="onSale && inStock">On Sale! {{ brand }} {{ product }} is on sale</p>
-                    <ul>
-                        <li v-for="detail in details">{{ detail }}</li>
-                    </ul>
-                    <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{ backgroundColor: variant.color }"></div>
-                    <button class="button" :disabled="!inStock" @click="addToCart" :class="{ disabledButton: !inStock }">Add To Cart</button>
-                    <button class="button" @click="toggleInStock">Toggle In Stock</button>
-                    <p>Sizes: <span v-for="(size, index) in sizes" :key="index">{{ size }}<span v-if="index < sizes.length - 1">, </span></span></p>
-                </div>
+    <div class="product-display">
+        <div class="product-container">
+            <div class="product-image">
+                <img :src="image" :class="{ 'out-of-stock-image': !inStock }" alt="Product Image">
+            </div>
+            <div class="product-info">
+                <h1>{{ title }}</h1>
+                <p v-if="inStock">In Stock</p>
+                <p v-else>Out of Stock</p>
+                <p v-if="onSale && inStock">On Sale! {{ brand }} {{ product }} is on sale</p>
+                <ul>
+                    <li v-for="detail in details">{{ detail }}</li>
+                </ul>
+                <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{ backgroundColor: variant.color }"></div>
+                <button class="button" :disabled="!inStock" @click="addToCart" :class="{ disabledButton: !inStock }">Add To Cart</button>
+                <button class="button" @click="toggleInStock">Toggle In Stock</button>
+                <p>Sizes: <span v-for="(size, index) in sizes" :key="index">{{ size }}<span v-if="index < sizes.length - 1">, </span></span></p>
             </div>
         </div>
+    </div>
     `,
-
-
-
-    setup() {
+    props: {
+        premium: Boolean
+    },
+    setup(props, { emit }) {
         const product = ref('Boots');
         const brand = ref('SE 331');
         const description = ref('Boots is a cosmetics shop');
@@ -46,7 +45,6 @@ const productDisplay = {
         const selectedVariant = ref(0);
         const cart = ref(0);
 
-
         const image = computed(() => {
             return variants.value[selectedVariant.value].image;
         });
@@ -64,7 +62,7 @@ const productDisplay = {
         }
 
         function addToCart() {
-            cart.value += 1;
+            emit('add-to-cart');
         }
 
         function toggleInStock() {
@@ -86,7 +84,6 @@ const productDisplay = {
             cart,
             image,
             inStock,
-            title,
             sizes,
             updateVariant,
             addToCart,
