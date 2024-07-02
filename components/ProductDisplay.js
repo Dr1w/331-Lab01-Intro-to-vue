@@ -12,9 +12,7 @@ const productDisplay = {
                 <p v-else>Out of Stock</p>
                 <p>Shipping: {{shipping}}</p>
                 <p v-if="onSale && inStock">On Sale! {{ brand }} {{ product }} is on sale</p>
-                <ul>
-                    <li v-for="detail in details">{{ detail }}</li>
-                </ul>
+                <product-details :details="details"></product-details>
                 <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{ backgroundColor: variant.color }"></div>
                 <button class="button" :disabled="!inStock" @click="addToCart" :class="{ disabledButton: !inStock }">Add To Cart</button>
                 <button class="button" @click="toggleInStock">Toggle In Stock</button>
