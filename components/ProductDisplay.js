@@ -10,6 +10,7 @@ const productDisplay = {
                 <h1>{{ title }}</h1>
                 <p v-if="inStock">In Stock</p>
                 <p v-else>Out of Stock</p>
+                <p>Shipping: {{shipping}}</p>
                 <p v-if="onSale && inStock">On Sale! {{ brand }} {{ product }} is on sale</p>
                 <ul>
                     <li v-for="detail in details">{{ detail }}</li>
@@ -26,6 +27,13 @@ const productDisplay = {
         premium: Boolean
     },
     setup(props, { emit }) {
+    const shipping = computed(() =>{
+      if(props.premium){
+          return 'Free'
+      } else {
+          return 30
+      }
+  })
         const product = ref('Boots');
         const brand = ref('SE 331');
         const description = ref('Boots is a cosmetics shop');
@@ -85,6 +93,7 @@ const productDisplay = {
             image,
             inStock,
             sizes,
+            shipping,
             updateVariant,
             addToCart,
             toggleInStock

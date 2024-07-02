@@ -3,6 +3,7 @@ const { createApp, ref, computed } = Vue;
 const app = createApp({
   setup() {
     const cart = ref(0);
+    const premium = ref(false);//9.9
 
     function updateCart() {
       cart.value += 1;
@@ -10,6 +11,7 @@ const app = createApp({
 
     return {
       cart,
+      premium,
       updateCart
     };
   }
