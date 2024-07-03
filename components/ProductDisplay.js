@@ -16,6 +16,7 @@ const productDisplay = {
                 <div v-for="(variant, index) in variants" :key="variant.id" @mouseover="updateVariant(index)" class="color-circle" :style="{ backgroundColor: variant.color }"></div>
                 <button class="button" :disabled="!inStock" @click="addToCart" :class="{ disabledButton: !inStock }">Add To Cart</button>
                 <button class="button" @click="toggleInStock">Toggle In Stock</button>
+                <button class="button" @click="removeFromCart">Remove From Cart</button>
                 <p>Sizes: <span v-for="(size, index) in sizes" :key="index">{{ size }}<span v-if="index < sizes.length - 1">, </span></span></p>
             </div>
         </div>
@@ -71,6 +72,13 @@ const productDisplay = {
             emit('add-to-cart' , variants.value[selectedVariant.value].id);
         }
 
+        function removeFromCart() {
+
+            emit('remove-from-cart', variants.value[selectedVariant.value].id);
+
+    }
+ 
+
         function toggleInStock() {
             variants.value[selectedVariant.value].quantity = !variants.value[selectedVariant.value].quantity;
             onSale.value = variants.value[selectedVariant.value].quantity > 0;
@@ -94,6 +102,7 @@ const productDisplay = {
             shipping,
             updateVariant,
             addToCart,
+            removeFromCart,
             toggleInStock
         };
     }
