@@ -9,9 +9,23 @@ const app = createApp({
       cart.value.push(id);
     }
 
+const cartItemCount = computed(() => {
+      const itemCount = {};
+      cart.value.forEach(id => {
+        if (!itemCount[id]) {
+          itemCount[id] = 1;
+        } else {
+          itemCount[id]++;
+        }
+      });
+      return itemCount;
+    });
+ 
+
     return {
       cart,
       premium,
+      cartItemCount,
       updateCart
     };
   }
