@@ -1,4 +1,4 @@
-const { createApp, ref, computed } = Vue;
+const { createApp, ref, computed , reactive } = Vue;
 
 const app = createApp({
   setup() {
@@ -47,4 +47,5 @@ function removeFromCart(id) {
 
 app.component('product-display', productDisplay);
 app.component('product-details', productDetails);
+app.component('review-form', reviewForm);
 app.mount('#app');

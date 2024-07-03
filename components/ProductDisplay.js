@@ -19,6 +19,7 @@ const productDisplay = {
                 <button class="button" @click="removeFromCart">Remove From Cart</button>
                 <p>Sizes: <span v-for="(size, index) in sizes" :key="index">{{ size }}<span v-if="index < sizes.length - 1">, </span></span></p>
             </div>
+            <review-form></review-form>
         </div>
     </div>
     `,
