@@ -68,7 +68,7 @@ const productDisplay = {
         }
 
         function addToCart() {
-            emit('add-to-cart');
+            emit('add-to-cart' , variants.value[selectedVariant.value].id);
         }
 
         function toggleInStock() {
