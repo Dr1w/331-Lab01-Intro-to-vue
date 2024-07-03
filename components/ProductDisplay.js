@@ -19,7 +19,7 @@ const productDisplay = {
                 <button class="button" @click="removeFromCart">Remove From Cart</button>
                 <p>Sizes: <span v-for="(size, index) in sizes" :key="index">{{ size }}<span v-if="index < sizes.length - 1">, </span></span></p>
             </div>
-            <review-form></review-form>
+            <review-form @review-submitted="addReview"></review-form>
         </div>
     </div>
     `,
@@ -53,6 +53,8 @@ const productDisplay = {
         const selectedVariant = ref(0);
         const cart = ref(0);
 
+        const reviews = ref([]);
+
         const image = computed(() => {
             return variants.value[selectedVariant.value].image;
         });
@@ -85,6 +87,11 @@ const productDisplay = {
             onSale.value = variants.value[selectedVariant.value].quantity > 0;
         }
 
+        function addReview(review){
+            reviews.value.push(review);
+            console.log('Review added:', review); // 添加这行来记录日志
+        }
+
         return {
             product,
             title,
@@ -101,10 +108,12 @@ const productDisplay = {
             inStock,
             sizes,
             shipping,
+            reviews,
             updateVariant,
             addToCart,
             removeFromCart,
-            toggleInStock
+            toggleInStock,
+            addReview
         };
     }
 };
